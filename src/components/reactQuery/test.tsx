@@ -1,8 +1,8 @@
 import React from 'react'
+import Image from 'next/image';
 import {
     Flex,
     Text,
-    Image,
     FlexProps
 } from "@chakra-ui/react";
 
@@ -27,7 +27,8 @@ return(
             alignItems="center"
             >
             <Image
-            borderRadius="50%" 
+            width={220}
+            height={220}
             src={avatar} 
             />
             <Text 

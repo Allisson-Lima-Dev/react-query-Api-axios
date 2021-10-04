@@ -3,7 +3,6 @@ import ReactQuery from '~/components/reactQuery/ReactQuery'
 import SemQuery from '~/components/reactQuery/SemReactQuery'
 import Test from '../components/reactQuery/test'
 import { useQuery } from 'react-query'
-
 import {
   Flex,
   Box,
@@ -59,10 +58,10 @@ export default function Home() {
       align="center"
       mt="100px"
     >
-      <Heading>Paginação com API usando React Query</Heading>
+      <Heading>Paginação com API usando React Query/Axios</Heading>
       <Heading color="red.300">Página {pageUser}</Heading>
       <Flex
-        flexDir="row"
+        flexDir={['column','column','row','row']}
         justifyContent="center"
         align="center"
       >
@@ -90,7 +89,9 @@ export default function Home() {
       <Heading my="50px">Sem Query</Heading>
       <SemQuery/> */}
       <Flex
-        mt="50px">
+        mt="50px"
+        mb="50px"
+        >
         <Button
           onClick={() => setPageUser(prev => prev - 1)}
           disabled={pageUser === 1}

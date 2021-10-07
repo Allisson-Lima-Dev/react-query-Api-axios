@@ -13,7 +13,7 @@ interface IDataProps extends FlexProps{
     last_name: string
     avatar: string
 }
-export default function ShowUsers({
+export function CardProfile({
     id, 
     email, 
     first_name, 

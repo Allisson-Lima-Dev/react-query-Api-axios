@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import ReactQuery from '~/components/reactQuery/ReactQuery'
-import SemQuery from '~/components/reactQuery/SemReactQuery'
-import Test from '../components/reactQuery/test'
 import { useQuery } from 'react-query'
+import { 
+  CardProfile 
+} from '~/components'
 import {
   Flex,
   Box,
   Text,
   Heading,
   Spinner,
-  Button
+  Button, 
 } from '@chakra-ui/react'
 import axios from 'axios'
 
@@ -17,15 +17,17 @@ export default function Home() {
 
   const [users, setUsers] = useState<any[]>([]);
   const [pageUser, setPageUser] = useState(1)
-  const [total, setTotal] = useState()
+  const [numbUsers, setNumbUsers] = useState<any>(2)
+  const [pagesTotal, setPagesTotal] = useState<any>()
+  const valeuPage = (pagesTotal / numbUsers)
 
   const getUsers = async () => {
 
-    const { data } = await axios.get("https://reqres.in/api/users", { params: { per_page: 3, page: pageUser } });
-
+    const { data } = await axios.get("https://reqres.in/api/users", { params: { per_page: numbUsers, page: pageUser,  } });
+    setPagesTotal(data.total)
+    console.log(data.total)
     console.log(data.data)
     setUsers(data.data);
-    setTotal(data.total_pages)
   };
   const { data, isError, isLoading, } = useQuery(["users", pageUser], () => getUsers())
   if (isError) {
@@ -70,7 +72,7 @@ export default function Home() {
             return (
               <Box
                 key={user.id}>
-                <Test
+                <CardProfile
                   mt="50px"
                   mx="50px"
                   flexDir="row"
@@ -84,10 +86,6 @@ export default function Home() {
           })}
 
       </Flex>
-      {/* <Heading>com Query</Heading>
-      <ReactQuery/>
-      <Heading my="50px">Sem Query</Heading>
-      <SemQuery/> */}
       <Flex
         mt="50px"
         mb="50px"
@@ -103,7 +101,7 @@ export default function Home() {
         </Button>
         <Button
           onClick={() => setPageUser(next => next + 1)}
-          disabled={pageUser === total}
+          disabled={pageUser >= valeuPage }
           bg="green"
           color="#fff"
         >

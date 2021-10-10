@@ -15,6 +15,7 @@ export interface IData {
     avatar: string
 }
 
+
 async function getUser(id: number) {
     const request = await fetch(`https://reqres.in/api/users/${id}?delay=1`)
     try {

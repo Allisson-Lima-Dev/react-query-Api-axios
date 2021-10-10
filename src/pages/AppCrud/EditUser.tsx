@@ -8,10 +8,7 @@ function EditUser() {
     return (
 
         <div>
-            <Input
-                w="50%"
-                name="Aliison"
-                email="" />
+            <Form/>
         </div>
     )
 }

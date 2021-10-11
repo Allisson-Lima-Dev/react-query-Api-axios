@@ -15,13 +15,15 @@ import {
 import axios from "axios";
 
 interface IFormInputs {
-  title: string
-  content: string
+  name: string
+  email: string
+  descripition: string
 }
 
 const schema = yup.object({
-  title: yup.string().required("Preencha seu nome"),
-  content: yup.string().required("Preencha seu trabalho"),
+  name: yup.string().required("Preencha seu nome"),
+  email: yup.string().required("Preencha seu trabalho"),
+  descripition: yup.string().required("Preencha seu trabalho"),
 }).required();
 export default function App() {
   const { register,  handleSubmit, formState: { errors, isSubmitted, isValidating } } = useForm<IFormInputs>({
@@ -65,23 +67,34 @@ export default function App() {
               <Input
                 mb="15px"
                 mt="7px"
-                {...register("title")}
+                {...register("name")}
               />
             </label>
             <p
               style={{ color: 'red' }}>
-              {errors.title?.message}
+              {errors.name?.message}
             </p>
-            <label> Trabalho Atual
+            <label> Email
               <Input
                 mb="15px"
                 mt="7px"
-                {...register("content")}
+                {...register("email")}
               />
             </label>
             <p
               style={{ color: 'red' }}
-            >{errors.content?.message}
+            >{errors.email?.message}
+            </p>
+            <label> Descrição
+              <Input
+                mb="15px"
+                mt="7px"
+                {...register("descripition")}
+              />
+            </label>
+            <p
+              style={{ color: 'red' }}
+            >{errors.descripition?.message}
             </p>
 
             {/* <Button
@@ -97,7 +110,7 @@ export default function App() {
               bg="#4974a5"
               color="#fff"
               w="100%"
-              disabled={errors.title && errors.content? true:false}
+              disabled={errors.name && errors.email? true:false}
               onClick={() =>
                 isSubmitted ?
                 toast({
